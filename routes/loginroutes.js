@@ -3,4 +3,5 @@ const express=require("express")
 const loginroute=express.Router();
 
 loginroute.get("/login",logincontroller.login);
+
 module.exports=loginroute;

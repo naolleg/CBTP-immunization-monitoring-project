@@ -1,6 +1,4 @@
 const query =require("../config/db")
-const env=require("env")
-env.config();
 const userquery=require("../queries/users.queries")
 
 const userservice={

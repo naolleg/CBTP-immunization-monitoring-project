@@ -1,4 +1,4 @@
-const userservice=require("../services/users.servces")
+const userservice=require("../services/users.services")
 const usercontroller={
 
 getuser:async(data)=>{

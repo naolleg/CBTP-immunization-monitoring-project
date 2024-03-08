@@ -1,0 +1,76 @@
+const loginService = require("../services/login.services");
+const userService = require("../services/users.services");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+
+const loginController = {
+  login: async (req, res) => {
+    try {
+      const { username,password } = req.body;
+
+      // Check if all fields are given
+      if (!username || !password) {
+        return res.status(400).json({
+          success: false,
+          message: "All fields are required",
+        });
+      }
+
+      // Check if email is used before
+      const isUsernameExist = await userService.getUserByusername(req.body);
+
+      // If there is no account related to this email
+      if (!isUsernameExist.length) {
+        return res.status(404).json({
+          success: false,
+          message: "No account exists with this username",
+        });
+      }
+      // If the account exists, check for password
+      req.body.userId = isUsernameExist[0].userId;
+      const isUserPasswordExist = await loginService.getUserPasswordByUserId(
+        req.body
+      );
+      const dbPassword = isUserPasswordExist[0].password;
+
+      // Compare user password with db password
+      const isMatch = bcrypt.compareSync(password, dbPassword);
+      if (!isMatch) {
+        return res.status(400).json({
+          success: false,
+          message: "Incorrect password",
+        });
+      } else {
+        //Extracting first name and user role
+        const userInfo = await loginService.getUserRoleAndFirstName(req.body);
+        console.log(userInfo);
+        const firstname = userInfo[0].firstname;
+        const role = userInfo[0].role;
+        const userId = req.body.userId;
+
+        //Prepare token
+        const token = jwt.sign(
+          { userId, role, firstname },
+          process.env.JWT_SECRET,
+          {
+            // expiresIn: '1h',
+          }
+        );
+        console.log(token);
+
+        return res.status(200).json({
+          token,
+          success: true,
+          message: "Login successfully",
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  },
+};
+
+module.exports = loginController;
