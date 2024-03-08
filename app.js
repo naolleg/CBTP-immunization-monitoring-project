@@ -1,15 +1,19 @@
 const express=require("express");
-const approute=require("./routes/index.routes")
+const env=require("dotenv");
+const appRoute=require("./routes/index.routes")
 const app=express();
-
+env.config();
 //middle ware
-app.use(express.urlencoded[{extended:true}]);
-app.use(express.json);
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
 
 app.use(appRoute);
 
-app.get("/",(res,req)=>
-{
-console.log("hi");
+
+app.listen(process.env.SERVER_PORT,process.env.SERVER_HOST,(error)=>{
+    if(error) throw error;
+    else console.log(`server is running on  http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`);
 })
+

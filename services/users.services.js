@@ -11,6 +11,23 @@ const userservice={
   catch (error) {
     throw error
   }   
-}
-}
+},getUserByUsername: async (data) => {
+  try {
+    const rows = await query(userquery.getUserByusername, [data.username]);
+    return rows;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+},
+registeruser:async (data)=>{
+    try {
+        const rows = await query(userquery.registeruser, [data]);
+        return rows;
+      } catch (e) {
+        console.log(e);
+        return null;
+      }
+
+}}
 module.exports=userservice

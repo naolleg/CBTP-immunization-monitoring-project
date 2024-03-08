@@ -8,7 +8,7 @@ const loginController = {
     try {
       const { username,password } = req.body;
 
-      // Check if all fields are given
+      // Validation
       if (!username || !password) {
         return res.status(400).json({
           success: false,
@@ -16,8 +16,8 @@ const loginController = {
         });
       }
 
-      // Check if email is used before
-      const isUsernameExist = await userService.getUserByusername(req.body);
+      
+      const isUsernameExist = await userService.getUserByUsername(req.body);
 
       // If there is no account related to this email
       if (!isUsernameExist.length) {
