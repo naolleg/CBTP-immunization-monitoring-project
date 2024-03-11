@@ -29,5 +29,14 @@ registeruser:async (data)=>{
         return null;
       }
 
-}}
+},
+registermother:async (data)=>{
+    try {
+        const rows = await query(userquery.registermother, [data]);
+        return rows;
+      } catch (e) {
+        console.log(e);
+        return null;
+      }
+}
 module.exports=userservice

@@ -12,7 +12,7 @@ getuser: async (req,res)=>{
         data: result
     })
   },
-createUser: async (req,res)=>{
+registermother: async (req,res)=>{
     try {
       const {
         username,
@@ -20,7 +20,10 @@ createUser: async (req,res)=>{
         role,
         firstname,
         lastname,
-        image
+        image,
+        date_of_birth,
+        address,
+        phone_number
          
       } = req.body;
       if( !username ||
@@ -28,12 +31,13 @@ createUser: async (req,res)=>{
         !role ||
         !firstname ||
         !lastname ||
-        !image  ){
+        !image ||!date_of_birth||!address||!phone_number){
           return res.status(400).json({
             success: false,
             message: "All fields are required"
           })
         }
+        
         const isUserExist = await userservice.getUserByUsername(username);
         console.log(isUserExist);
         if(isUserExist.length>0){
@@ -47,18 +51,16 @@ createUser: async (req,res)=>{
         const salt = bcrypt.genSaltSync(saltRounds);
         req.body.password = bcrypt.hashSync(password,salt);
         
-        const isUserRegistered = await userservice.registeruser(req.body);
+        const registerAsUser = await userservice.registeruser(req.body);
+        const registerAsMother = await userservice.registermother(req.body);
+
         console.log(isUserRegistered.insertId);
-        if(isUserRegistered){
+        if(registerAsUser&&registerAsMother){
           return res.status(200).json({
             success: true,
             message: "user registered successfully"
           })
         }
-
-        
-
-  
       
     } catch (error) {
       throw error
@@ -66,6 +68,58 @@ createUser: async (req,res)=>{
 
 
   },
+registerChild:async(req,res)=>{
+  try {
+    const{
+      firstname,
+      middlename,
+      lastname,
+      gender,
+      date_of_birth,
+      blood_type
+    }=req.body
+    if( !middlename ||
+      !gender ||
+      !date_of_birth ||
+      !firstname ||
+      !lastname ||
+      !blood_type){
+        return res.status(400).json({
+          success: false,
+          message: "All fields are required"
+        })
+      }
+
+      const registerchild = await userservice.registerchild(req.body);
+      if(registerchild){
+        return res.status(200).json({
+          success: true,
+          message: "user registered successfully"
+        })
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  } catch (error) {
+    throw error
+    
+  }
+},
   updateUser: (req,res)=>{},
   deleteUser: (req,res)=>{},
 //   getUsers: async (req,res)=>{
