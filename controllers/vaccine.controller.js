@@ -27,5 +27,12 @@ return res.status(200).json({
 }
 
 };
+Vaccination: async(req,res)=>{
+  const result=await vaccineService.recordVaccination(req.body);
+  return res.status(200).json({
+      success: true,
+      data: result
+  })
+}
 
 module.exports=vaccinecontroller

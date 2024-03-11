@@ -4,15 +4,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const usercontroller={
 
-getuser: async (req,res)=>{
-    const result = await userservice.getAlluser();
-   // console.log(result);
-    return res.status(200).json({
-        success: true,
-        data: result
-    })
-  },
-  registeruser: async (req,res)=>{
+
+registermother: async (req,res)=>{
     try {
       const {
         username,
@@ -21,6 +14,8 @@ getuser: async (req,res)=>{
         firstname,
         lastname,
         image,
+        date_of_birth,
+        address,
         phone_number
          
       } = req.body;
@@ -29,7 +24,7 @@ getuser: async (req,res)=>{
         !role ||
         !firstname ||
         !lastname ||
-        !image ||!phone_number){
+        !image ||!date_of_birth||!address||!phone_number){
           return res.status(400).json({
             success: false,
             message: "All fields are required"
@@ -44,16 +39,16 @@ getuser: async (req,res)=>{
             message: "this username is taken"
           })
         }
-       
         //add constant for the salt
         const saltRounds = 10
         const salt = bcrypt.genSaltSync(saltRounds);
         req.body.password = bcrypt.hashSync(password,salt);
         
         const registerAsUser = await userservice.registeruser(req.body);
+        const registerAsMother = await userservice.registermother(req.body);
 
-        
-        if(registerAsUser){
+        console.log(isUserRegistered.insertId);
+        if(registerAsUser&&registerAsMother){
           return res.status(200).json({
             success: true,
             message: "user registered successfully"
@@ -66,49 +61,39 @@ getuser: async (req,res)=>{
 
 
   },
+registerChild:async(req,res)=>{
+  try {
+    const{
+      firstname,
+      middlename,
+      lastname,
+      gender,
+      date_of_birth,
+      blood_type
+    }=req.body
+    if( !middlename ||
+      !gender ||
+      !date_of_birth ||
+      !firstname ||
+      !lastname ||
+      !blood_type){
+        return res.status(400).json({
+          success: false,
+          message: "All fields are required"
+        })
+      }
+
+      const registerchild = await userservice.registerchild(req.body);
+      if(registerchild){
+        return res.status(200).json({
+          success: true,
+          message: "user registered successfully"
+        })
+      }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  updateUser: (req,res)=>{},
-  deleteUser: (req,res)=>{},
-//   getUsers: async (req,res)=>{
-//     const result = await userService.getAllusers();
-//    // console.log(result);
-//     return res.status(200).json({
-//         success: true,
-//         data: result
-//     })
-//   },
-//   getsingleUsers: async (req,res)=>{
-//     const id = req.params.id.substring(1);
-//     const result = await UserService.getSinglelusers(id);
-//     if(result.length>0){
-//       return res.status(200).json({
-//         success: true,
-//         data: result
-//       })
-//     }
-    // else{
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "no user is found"
-    //   })
-    // }
-
+  } catch (error) {
+    throw error
+    
   }
-
-
-module.exports=usercontroller
+    },}
