@@ -2,6 +2,13 @@ const query =require("../config/db")
 const userquery=require("../queries/users.queries")
 
 const userservice={
+  getrolebyusername:async(data)=>{
+try {
+  const row=await query(userquery.getRoleByUsername,[data])
+} catch (error) {
+  throw error
+}
+  },
     
     getAlluser:async(data)=>{
         try {

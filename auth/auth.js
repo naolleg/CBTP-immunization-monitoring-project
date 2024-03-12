@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-const userService = require('../services/user.service.js');
+const userService = require('../services/users.services');
 
 dotenv.config();
 const auth = (req,res,next)=>{
@@ -35,7 +35,7 @@ const auth = (req,res,next)=>{
 
 const isAdmin = async (req,res,next)=>{
   try {
-   const response = await userService.getCompanyRoleNameUsingUserId(req.userId);
+   const response = await userService.getrolebyusername(req.userId);
    if(!response && !response.length > 0 &&  !(response[0].role ==='admin')){
       return res.status(403).json({
          success: false,
@@ -53,7 +53,7 @@ const isAdmin = async (req,res,next)=>{
 }
 const isRegistrer= async (req,res,next)=>{
   try {
-   const response = await userService.getCompanyRoleNameUsingUserId(req.userId);
+   const response = await userService.getrolebyusername(req.userId);
    if(!response && !response.length > 0 &&  !(response[0].role ==='registrer')){
       return res.status(403).json({
          success: false,
@@ -67,4 +67,4 @@ const isRegistrer= async (req,res,next)=>{
    console.log(error);
    res.status(500).json({ success: false, message: err.message });
   }}
-export { auth ,isAdmin,isRegistrer};
+module.exports= { auth ,isAdmin,isRegistrer};
