@@ -26,6 +26,15 @@ const loginController = {
           message: "No account exists with this username",
         });
       }
+      const userStatus = await loginService.getUserStatus(isUsernameExist[0].userId);
+
+      if (userStatus === null) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      if (userStatus === 0) {
+        return res.status(401).json({ message: 'User is deactivated' });
+      }
       // If the account exists, check for password
       req.body.userId = isUsernameExist[0].userId;
       const isUserPasswordExist = await loginService.getUserPasswordByUserId(

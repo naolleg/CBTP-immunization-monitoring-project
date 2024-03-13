@@ -29,5 +29,15 @@ const loginService = {
           return null;
         }
       },
+      getUserStatus:async (data) => {
+        try {
+          const rows = await query(loginquery.getUserStatus, [data.userId]);
+          console.log(rows);
+          return rows;
+        } catch (e) {
+          console.log(e);
+          return null;
+        }
+      }
     };
     module.exports=loginService
