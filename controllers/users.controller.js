@@ -93,19 +93,8 @@ getuser: async (req,res)=>{
   },
 
 
-
-
-
-
-
-
-
-
-
-
-
   updateUser: (req,res)=>{},
-  deleteUser: (req,res)=>{},
+
 //   getUsers: async (req,res)=>{
 //     const result = await userService.getAllusers();
 //    // console.log(result);
