@@ -6,5 +6,6 @@ const vaccinecontroller=require("../controllers/vaccine.controller")
 
 vaccineroute.get("/api/vaccine",auth,vaccinecontroller.getvaccine);
 vaccineroute.post("/api/vaccine",[ auth,isAdmin],vaccinecontroller.registervaccine);
+vaccineroute.post()
 
 module.exports=vaccineroute;

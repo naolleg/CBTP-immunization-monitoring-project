@@ -16,3 +16,4 @@ const childService = {
         return row
     }
 }
+module.exports = childService
