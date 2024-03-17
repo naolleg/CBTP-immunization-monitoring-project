@@ -1,5 +1,5 @@
 const vaccinequery={
-    registervaccine:'INSERT INTO Vaccine(v_Name,description) VALUES(?,?);',
+    registervaccine:'INSERT INTO Vaccine(v_name,description) VALUES(?,?);',
     getvaccine: 'SELECT * FROM vaccine;',
     
 }

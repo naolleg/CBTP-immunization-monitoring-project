@@ -13,30 +13,28 @@ getuser: async (req,res)=>{
         data: result
     })
   },
-  registeruser: async (req,res)=>{
+  registeruser: async (req,res,next)=>{
+    
     try {
       const {
         username,
         password,
-        role,
         firstname,
+        role,
         lastname,
-        image,
-        phone_number
-         
+        phonenumber
       } = req.body;
+      
       if( !username ||
         !password ||
-        !role ||
-        !firstname ||
-        !lastname ||
-        !image ||!phone_number){
+        !firstname ||!role||
+        !lastname ||!phonenumber){
           return res.status(400).json({
             success: false,
             message: "All fields are required"
           })
         }
-        
+        console.log("ssferegfewref");
         const isUserExist = await userservice.getUserByUsername(username);
         console.log(isUserExist);
         if(isUserExist.length>0){
@@ -45,15 +43,19 @@ getuser: async (req,res)=>{
             message: "this username is taken"
           })
         }
-       
         //add constant for the salt
         const saltRounds = 10
         const salt = bcrypt.genSaltSync(saltRounds);
         req.body.password = bcrypt.hashSync(password,salt);
         
-        const registerAsUser = await userservice.registeruser(req.body);
-
-        
+        console.log("dsssvvfsvfssvf");
+        const registerAsUser = await userservice.registeruser(
+          username,
+          firstname,
+          lastname,
+          role,
+          password
+        );
         if(registerAsUser){
           return res.status(200).json({
             success: true,

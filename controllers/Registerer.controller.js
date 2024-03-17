@@ -6,14 +6,11 @@ const registrercontroller={
 
 
   registermother: async (req,res,next)=>{
-    function next() {
-      console.log("dsfdcwcdasd");
-    }
+   
     try {
       const {
         username,
         password,
-        role,
         firstname,
         lastname,
         date_of_birth,
@@ -23,7 +20,6 @@ const registrercontroller={
       
       if( !username ||
         !password ||
-        !role ||
         !firstname ||
         !lastname ||!date_of_birth||!address||!phonenumber){
           return res.status(400).json({
@@ -50,7 +46,6 @@ const registrercontroller={
           username,
           firstname,
           lastname,
-          role,
           password
         );
         console.log(registerAsUser);

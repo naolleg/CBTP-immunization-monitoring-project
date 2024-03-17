@@ -12,6 +12,7 @@ const vaccinecontroller = {
           message: "All fields are required"
         })
       }
+      console.log("fefwsfefd");
 const result=await vaccineService.registervaccine(req.body);
 return res.status(200).json({
     success: true,

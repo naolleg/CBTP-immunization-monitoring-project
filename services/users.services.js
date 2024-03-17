@@ -39,15 +39,15 @@ const userservice = {
     }
   },
 
-  registeruser: async (username, firstname, lastname, role, password) => {
+  registeruser: async (username, firstname, lastname, password) => {
     try {
       const rows = await query(userquery.registeruser, [
         firstname,
         lastname,
         username,
-        role,
         password,
       ]);
+      console.log(rows);
       return rows;
     } catch (e) {
       console.log(e);
@@ -63,6 +63,7 @@ const userservice = {
         address,
         phonenumber,
       ]);
+      console.log(rows);
       return rows;
     } catch (e) {
       console.log(e);
