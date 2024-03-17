@@ -39,9 +39,15 @@ const userservice = {
     }
   },
 
-  registeruser: async (data) => {
+  registeruser: async (username, firstname, lastname, role, password) => {
     try {
-      const rows = await query(userquery.registeruser, [data]);
+      const rows = await query(userquery.registeruser, [
+        firstname,
+        lastname,
+        username,
+        role,
+        password,
+      ]);
       return rows;
     } catch (e) {
       console.log(e);
@@ -49,9 +55,14 @@ const userservice = {
     }
   },
 
-  registermother: async (data) => {
+  registermother: async (userId, dateOfBirth, address, phoneNumber) => {
     try {
-      const rows = await query(userquery.registermother, [data]);
+      const rows = await query(userquery.registermother, [
+        userId,
+        dateOfBirth,
+        address,
+        phoneNumber,
+      ]);
       return rows;
     } catch (e) {
       console.log(e);
@@ -61,7 +72,4 @@ const userservice = {
   
 };
 
-module.exports = {
-  userservice: userservice,
-  userservice: userservice.deactivateUser
-};
+module.exports = userservice;

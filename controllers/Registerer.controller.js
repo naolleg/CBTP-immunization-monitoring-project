@@ -2,10 +2,13 @@ const userservice=require("../services/users.services")
 const bcrypt = require("bcrypt"); // Import bcrypt correctly
 const dotenv = require("dotenv");
 dotenv.config();
-const usercontroller={
+const registrercontroller={
 
 
-registermother: async (req,res)=>{
+  registermother: async (req,res,next)=>{
+    function next() {
+      console.log("dsfdcwcdasd");
+    }
     try {
       const {
         username,
@@ -13,24 +16,22 @@ registermother: async (req,res)=>{
         role,
         firstname,
         lastname,
-        image,
         date_of_birth,
         address,
         phone_number
-         
       } = req.body;
+      
       if( !username ||
         !password ||
         !role ||
         !firstname ||
-        !lastname ||
-        !image ||!date_of_birth||!address||!phone_number){
+        !lastname ||!date_of_birth||!address||!phone_number){
           return res.status(400).json({
             success: false,
             message: "All fields are required"
           })
         }
-        
+        console.log("ssferegfewref");
         const isUserExist = await userservice.getUserByUsername(username);
         console.log(isUserExist);
         if(isUserExist.length>0){
@@ -44,11 +45,23 @@ registermother: async (req,res)=>{
         const salt = bcrypt.genSaltSync(saltRounds);
         req.body.password = bcrypt.hashSync(password,salt);
         
-        const registerAsUser = await userservice.registeruser(req.body);
-        const registerAsMother = await userservice.registermother(req.body);
+        const registerAsUser = await userservice.registeruser(
+          username,
+          firstname,
+          lastname,
+          role,
+          password
+        );
+        const user_id = registerAsUser.insertId;
+const registerAsMother = await userservice.registermother(
+  user_id,
+  date_of_birth,
+  address,
+  phone_number
+);
 
-        console.log(isUserRegistered.insertId);
-        if(registerAsUser&&registerAsMother){
+     
+        if(registerAsUser){
           return res.status(200).json({
             success: true,
             message: "user registered successfully"
@@ -97,3 +110,4 @@ registerChild:async(req,res)=>{
     
   }
     },}
+module.exports=registrercontroller

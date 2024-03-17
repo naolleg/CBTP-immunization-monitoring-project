@@ -1,6 +1,7 @@
 const vaccineService=require("../services/vaccine.services")
 const scheduleService=require("../services/schedule.services")
-const childservice=require("../services/child.services")
+const childservice=require("../services/child.services");
+
 
 function calculateNextScheduleDate(birthday, round) {
     // Calculate the number of months based on the round
@@ -33,9 +34,14 @@ function calculateNextScheduleDate(birthday, round) {
     return nextScheduleDate;
   } 
    async function getChildVaccinationHistory(req, res) {
-    const { childId } = req.params;
-  
     try {
+   
+  const mother_id=req.mother_id;
+
+
+    const  mother_Id  = req.params;
+    const childidbymother=await childservice.getchildbymother(mother_id)
+   
       // Retrieve the child's information including their birthday
       const child = await childservice.getchildbyid(childId);
   
