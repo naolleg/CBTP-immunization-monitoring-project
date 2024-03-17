@@ -55,13 +55,13 @@ const userservice = {
     }
   },
 
-  registermother: async (userId, dateOfBirth, address, phoneNumber) => {
+  registermother: async (userid, date_of_birth, address, phonenumber) => {
     try {
       const rows = await query(userquery.registermother, [
-        userId,
-        dateOfBirth,
+        userid,
+        date_of_birth,
         address,
-        phoneNumber,
+        phonenumber,
       ]);
       return rows;
     } catch (e) {

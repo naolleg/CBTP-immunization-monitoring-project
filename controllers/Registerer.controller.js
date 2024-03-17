@@ -18,14 +18,14 @@ const registrercontroller={
         lastname,
         date_of_birth,
         address,
-        phone_number
+        phonenumber
       } = req.body;
       
       if( !username ||
         !password ||
         !role ||
         !firstname ||
-        !lastname ||!date_of_birth||!address||!phone_number){
+        !lastname ||!date_of_birth||!address||!phonenumber){
           return res.status(400).json({
             success: false,
             message: "All fields are required"
@@ -45,6 +45,7 @@ const registrercontroller={
         const salt = bcrypt.genSaltSync(saltRounds);
         req.body.password = bcrypt.hashSync(password,salt);
         
+        console.log("dsssvvfsvfssvf");
         const registerAsUser = await userservice.registeruser(
           username,
           firstname,
@@ -52,16 +53,18 @@ const registrercontroller={
           role,
           password
         );
-        const user_id = registerAsUser.insertId;
+        console.log(registerAsUser);
+        const userid = registerAsUser.insertId;
+        console.log(userid);
 const registerAsMother = await userservice.registermother(
-  user_id,
+  userid,
   date_of_birth,
   address,
-  phone_number
+  phonenumber
 );
 
      
-        if(registerAsUser){
+        if(registerAsUser&&registerAsMother){
           return res.status(200).json({
             success: true,
             message: "user registered successfully"
