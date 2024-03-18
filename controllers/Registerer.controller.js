@@ -1,3 +1,4 @@
+const registrerService=require("../services/registrer.services")
 const userservice=require("../services/users.services")
 const bcrypt = require("bcrypt"); // Import bcrypt correctly
 const dotenv = require("dotenv");
@@ -42,7 +43,7 @@ const registrercontroller={
         req.body.password = bcrypt.hashSync(password,salt);
         
         console.log("dsssvvfsvfssvf");
-        const registerAsUser = await userservice.registeruser(
+        const registerAsUser = await registrerService.registermotherAsuser(
           username,
           firstname,
           lastname,
@@ -51,7 +52,7 @@ const registrercontroller={
         console.log(registerAsUser);
         const userid = registerAsUser.insertId;
         console.log(userid);
-const registerAsMother = await userservice.registermother(
+const registerAsMother = await registrerService.registermother(
   userid,
   date_of_birth,
   address,
