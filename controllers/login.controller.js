@@ -68,7 +68,7 @@ const loginController = {
            message: "Login successfully",
          });
       } else {
-       
+       console.log("fbgdkbskjdbksdbk");
         return res.status(400).json({
           success: false,
           message: "Incorrect password",
