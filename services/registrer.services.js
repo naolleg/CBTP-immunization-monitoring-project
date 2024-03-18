@@ -35,5 +35,15 @@ const registrerService = {
       return null;
     }
   },
+  registerchild: async ( data) => {
+    try {
+      const rows = await query(registrerQuery.registerchild, [data]);
+      console.log(rows);
+      return rows;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
 }
 module.exports=registrerService

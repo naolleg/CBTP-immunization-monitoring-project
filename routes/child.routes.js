@@ -1,13 +1,7 @@
-const childService=require("../services/child.services")
+const childController = require("../controllers/child.controller");
+const express=require("express")
+const childroute=express.Router();
 
-const childcontroller={
+childroute.get("api/child",childController.getchild);
+childroute.post("api/child",childController.postchild);
 
-    getchild:async()=>{
-        const result=await childService.getchild()
-        return result
-    },
-    postchild:async(data)=>{
-        const result=await childService.postchild(data)
-        return result
-    }
-}

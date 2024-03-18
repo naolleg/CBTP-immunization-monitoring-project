@@ -95,7 +95,7 @@ registerChild:async(req,res)=>{
         })
       }
 
-      const registerchild = await userservice.registerchild(req.body);
+      const registerchild = await registrerService.registerchild(req.body);
       if(registerchild){
         return res.status(200).json({
           success: true,
