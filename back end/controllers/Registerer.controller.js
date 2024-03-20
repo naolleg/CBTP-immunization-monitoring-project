@@ -9,9 +9,8 @@ const registrercontroller={
   registermother: async (req,res,next)=>{
    
     try {
-      const {
+       {
         username,
-        password,
         firstname,
         lastname,
         date_of_birth,
@@ -83,6 +82,7 @@ registerChild:async(req,res)=>{
       date_of_birth,
       blood_type
     }=req.body
+
     if( !middlename ||
       !gender ||
       !date_of_birth ||
@@ -94,7 +94,7 @@ registerChild:async(req,res)=>{
           message: "All fields are required"
         })
       }
-
+console.log("rwwefwewefwefwefew");
       const registerchild = await registrerService.registerchild(req.body);
       if(registerchild){
         return res.status(200).json({

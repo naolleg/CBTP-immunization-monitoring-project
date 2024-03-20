@@ -34,45 +34,44 @@ const loginController = {
   
       if (userStatus === 0) {
         return res.status(401).json({ message: 'User is deactivated' });
-      }
-      // If the account exists, check for password
-      req.body.userId = isUsernameExist[0].user_id;
+      }// If the account exists, check for password
+      req.body.userId = isEmailExist[0].userId;
       const isUserPasswordExist = await loginService.getUserPasswordByUserId(
         req.body
       );
       const dbPassword = isUserPasswordExist[0].password;
 
       // Compare user password with db password
-      // const isMatch = password, dbPassword;
-      if  (password === dbPassword) {
-         //Extracting first name and user role
-         const userInfo = await loginService.getUserRoleAndFirstName(req.body);
-         console.log(userInfo);
-         const firstname = userInfo[0].firstname;
-         const role = userInfo[0].role;
-         const userId = req.body.userId;
- 
-         //Prepare token
-         const token = jwt.sign(
-           { userId, role, firstname },
-           process.env.JWT_SECRET,
-           {
-             expiresIn: '1h',
-           }
-         );
-         console.log(token);
- 
-         return res.status(200).json({
-           token,
-           success: true,
-           message: "Login successfully",
-         });
-      } else {
-       console.log("fbgdkbskjdbksdbk");
+      const isMatch = bcrypt.compareSync(password, dbPassword);
+      if (!isMatch) {
         return res.status(400).json({
           success: false,
           message: "Incorrect password",
-        }); }
+        });
+      } else {
+        //Extracting first name and user role
+        const userInfo = await loginService.getUserRoleAndFirstName(req.body);
+        console.log(userInfo);
+        const firstname = userInfo[0].firstName;
+        const role = userInfo[0].role;
+        const userId = req.body.userId;
+
+        //Prepare token
+        const token = jwt.sign(
+          { userId, role, firstname },
+          process.env.JWT_SECRET,
+          {
+            // expiresIn: '1h',
+          }
+        );
+        console.log(token);
+
+        return res.status(200).json({
+          token,
+          success: true,
+          message: "Login successfully",
+        });
+      }
     } catch (error) {
       return res.status(500).json({
         success: false,
@@ -81,5 +80,3 @@ const loginController = {
     }
   },
 };
-
-module.exports = loginController;

@@ -1,80 +1,42 @@
-const vaccineService=require("../services/vaccine.services")
-const scheduleService=require("../services/schedule.services")
-const childservice=require("../services/child.services");
+const moment = require('moment');
 
+// Assuming you have retrieved the child's birthdate from the database as a string
+const birthdateFromDatabase = '2024-01-17 20:08:14';
 
-function calculateNextScheduleDate(birthday, round) {
-    // Calculate the number of months based on the round
-    let monthsToAdd;
-    switch (round) {
-      case 1:
-        monthsToAdd = 0;
-        break;
-      case 2:
-        monthsToAdd = 1;
-        break;
-      case 3:
-        monthsToAdd = 3;
-        break;
-      case 4:
-        monthsToAdd = 6;
-        break;
-      case 5:
-        monthsToAdd = 12;
-        break;
-      case 6:
-        monthsToAdd = 36;
-        break;
-      default:
-        monthsToAdd = 0;
-    }
-    const nextScheduleDate = new Date(birthday);
-    nextScheduleDate.setMonth(nextScheduleDate.getMonth() + monthsToAdd);
-  
-    return nextScheduleDate;
-  } 
-   async function getChildVaccinationHistory(req, res) {
-    try {
-   
-  const mother_id=req.mother_id;
+// Parse the birthdate and create a moment object
+const birthdate = moment(birthdateFromDatabase);
 
+// Calculate the child's age in months
+const ageInMonths = moment().diff(birthdate, 'months');
 
-    const  mother_Id  = req.params;
-    const childidbymother=await childservice.getchildbymother(mother_id)
-   
-      // Retrieve the child's information including their birthday
-      const child = await childservice.getchildbyid(childId);
-  
-      if (!child) {
-        return res.status(404).json({ message: 'Child not found' });
-      }
-  
-      // Retrieve the schedules associated with the child
-      const schedules = await Schedule.find({ child_id: childId }).populate('vaccine_id');
-  
-      // Prepare the vaccination history object
-      const vaccinationHistory = {
-        child: child,
-        history: [],
-      };
-  
-      // Iterate through the schedules and build the vaccination history
-      for (const schedule of schedules) {
-        const vaccine = schedule.vaccine_id;
-        const historyItem = {
-          date: schedule.date,
-          vaccine: {
-            name: vaccine.name,
-            description: vaccine.description,
-          },
-        };
-       
-      vaccinationHistory.history.push(historyItem);
-    }
+// Define the vaccination schedule rounds and their respective durations in months
+const vaccinationSchedule = [
+  { round: 'Birth', duration: 0 },
+  { round: '1 Month', duration: 1 },
+  { round: '3 Months', duration: 3 },
+  { round: '6 Months', duration: 6 },
+  { round: '1 Year', duration: 12 }
+];
 
-    return res.status(200).json(vaccinationHistory);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Internal server error' });
+// Find the next vaccination round that hasn't passed yet
+let nextVaccinationRound = null;
+for (const schedule of vaccinationSchedule) {
+  if (ageInMonths < schedule.duration) {
+    nextVaccinationRound = schedule;
+    break;
   }
+}
+
+// Calculate the next vaccination date if a round is found
+let nextVaccinationDate = null;
+if (nextVaccinationRound) {
+  nextVaccinationDate = birthdate.clone().add(nextVaccinationRound.duration, 'months');
+}
+
+// Check if the next vaccination date has been reached
+const currentDate = moment();
+if (nextVaccinationDate && nextVaccinationDate.isSameOrBefore(currentDate, 'day')) {
+  console.log('Next vaccination date reached. Notify the mother.');
+} else {
+  console.log('Next vaccination date not yet reached.');
 }

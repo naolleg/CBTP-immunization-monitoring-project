@@ -1,6 +1,6 @@
 const userservice=require("../services/users.services")
 const deactivateUser = require("../services/users.services").deactivateUser;
-const bcrypt = require("bcrypt"); // Import bcrypt correctly
+const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
 const usercontroller={
@@ -16,7 +16,7 @@ getuser: async (req,res)=>{
   registeruser: async (req,res,next)=>{
     
     try {
-      const {
+      let {
         username,
         password,
         firstname,
@@ -44,10 +44,19 @@ getuser: async (req,res)=>{
           })
         }
         //add constant for the salt
-        const saltRounds = 10
+        const saltRounds = 10;
         const salt = bcrypt.genSaltSync(saltRounds);
-        req.body.password = bcrypt.hashSync(password,salt);
         
+        try {
+          password = bcrypt.hashSync(password, salt);
+          
+
+        } catch (error) {
+        
+          console.error('Error occurred during password hashing:', error);
+          
+          throw error;
+        }
         console.log("dsssvvfsvfssvf");
         const registerAsUser = await userservice.registeruser(
           username,
