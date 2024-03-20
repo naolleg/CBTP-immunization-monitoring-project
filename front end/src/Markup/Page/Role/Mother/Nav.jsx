@@ -21,7 +21,7 @@ const navigate=useNavigate()
       <nav className=" border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
          
-            <span className="self-center mx-10 text-2xl font-semibold whitespace-nowrap ">
+            <span className=" mx-10 text-2xl font-semibold whitespace-nowrap ">
               Logo
             </span>
         
@@ -50,12 +50,12 @@ const navigate=useNavigate()
             </svg>
           </button>
           <div
-            className={`w-full md:block md:w-auto ${
+            className={`mx-auto w-full md:block md:w-auto ${
               isMenuOpen ? "block" : "hidden"
             }`}
             id="navbar-default"
           >
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md: ">
+            <ul className=" font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  ">
               <li>
                 <a
                   href="#"

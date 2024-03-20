@@ -9,9 +9,10 @@ import Index from "./Markup/Page/Common/Index";
 import Login from "./Markup/Page/Common/Login";
 import FourO4 from "./Markup/Page/Common/FourO4";
 import MotherRegistration from "./Markup/Page/Role/Reciption/MotherRegistration";
-import MotherList from "./Markup/Page/Role/Reciption/MotherList";
 import Profile from "./Markup/Page/Common/Profile";
 import SignUp from "./Markup/Page/Common/Signup";
+import MotherList from "./Markup/Page/Role/Reciption/MotherList copy";
+import ChildInfo from "./Markup/Page/Role/Reciption/ChildInfo";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -45,7 +46,9 @@ function App() {
         {/* For reception */}
 
         <Route path="/motherRegistration" element={<MotherRegistration />} />
-        <Route path="/motherlist" element={<MotherList />} />
+        {/* <Route path="/motherlist" element={<MotherList />} /> */}
+        <Route path="/motherlist" element={<MotherList/>} />
+        <Route path="/childinfo" element={<ChildInfo/>} />
 
 
         {/* For Health Officer */}

@@ -2,8 +2,8 @@ import React from "react";
 import hero from "../../../assets/hero.png";
 import Nav from "../Role/Mother/Nav";
 import image1 from "../../../assets/Screenshot (42).png";
-import image2 from "../../../assets/Screenshot (16).png";
-import image3 from "../../../assets/Screenshot (15).png";
+import image2 from "../../../assets/Screenshot (13).png";
+import image3 from "../../../assets/cc28d30398b84c9473fd39a567e9ed97.png";
 
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 
@@ -13,6 +13,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import LatestNews from "../../Component/Common/LatestNews";
+import GlobalNew from "../../Component/Common/GlobalNew";
+import Footer from "./Footer";
 
 function Index(props) {
   return (
@@ -23,12 +26,12 @@ function Index(props) {
           style={{ backgroundImage: `url(${hero})`, filter: `brightness(66%)` }}
         >
           <Nav />
-          <div className=" md:grid md:grid-cols-2 ms-4 md:ms-10">
+          <div className=" md:grid md:grid-cols-2 mx-[5%] md:mx-[7%]">
             <div>
               <p className="text-3xl md:text-5xl  text-white pt-10 md:pt-20">
                 Be On Time, Stay Protected: Seamlessly Scheduled Vaccinations!
               </p>
-              <p className="text-white pt-5 text-xs line-clamp-3">
+              <p className="text-white pt-5 text-xs md:text-lg line-clamp-3 ">
                  Our Immunization Monitoring System ensures you stay protected
                 by prioritizing on-time vaccinations with a seamless scheduling
                 process.
@@ -85,7 +88,7 @@ function Index(props) {
             onSlideChange={() => console.log("slide change")}
             className=""
             breakpoints={{
-              0:{
+              0: {
                 slidesPerView: 1,
                 spaceBetween: 1,
               },
@@ -98,115 +101,56 @@ function Index(props) {
                 spaceBetween: 1,
               },
               1024: {
-                slidesPerView: 4,
+                slidesPerView: 3.5,
                 spaceBetween: 1,
               },
             }}
           >
             <div class="flex flex-wrap">
               <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div class="w-full ">
-                  <div class="mb-10 w-full">
-                    <div class="mb-2 overflow-hidden rounded">
-                      <img src={image1} alt="image" class="w-full" />
-                    </div>
-                    <div>
-                      <span class=" inline-block text-xs font-semibold text-gray-500 leading-loose ">
-                        Dec 22, 2023
-                      </span>
-                      <h3>
-                        <p
-                          href=" "
-                          class="mb-4 inline-block text-xl font-semibold text-dark hover:text-primary xl:text-2xl"
-                        >
-                          Meet AutoManage, the best AI management tools
-                        </p>
-                      </h3>
-                      <p class="text-base text-body-color">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <LatestNews
+                  image={image1}
+                  date=" Dec 22, 2023"
+                  title="Meet AutoManage, the best AI management tools"
+                  detaile="Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry."
+                />
               </SwiperSlide>
               <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div class="w-full ">
-                  <div class="mb-10 w-full">
-                    <div class="mb-2 overflow-hidden rounded">
-                      <img src={image1} alt="image" class="w-full" />
-                    </div>
-                    <div>
-                      <span class=" inline-block text-xs font-semibold text-gray-500 leading-loose ">
-                        Dec 22, 2023
-                      </span>
-                      <h3>
-                        <p
-                          href=" "
-                          class="mb-4 inline-block text-xl font-semibold text-dark hover:text-primary xl:text-2xl"
-                        >
-                          Meet AutoManage, the best AI management tools
-                        </p>
-                      </h3>
-                      <p class="text-base text-body-color">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <LatestNews
+                  image={image2}
+                  date=" Dec 22, 2023"
+                  title="Meet AutoManage, the best AI management tools"
+                  detaile="Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry."
+                />
               </SwiperSlide>
               <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div class="w-full ">
-                  <div class="mb-10 w-full">
-                    <div class="mb-2 overflow-hidden rounded">
-                      <img src={image1} alt="image" class="w-full" />
-                    </div>
-                    <div>
-                      <span class=" inline-block text-xs font-semibold text-gray-500 leading-loose ">
-                        Dec 22, 2023
-                      </span>
-                      <h3>
-                        <p
-                          href=" "
-                          class="mb-4 inline-block text-xl font-semibold text-dark hover:text-primary xl:text-2xl"
-                        >
-                          Meet AutoManage, the best AI management tools
-                        </p>
-                      </h3>
-                      <p class="text-base text-body-color">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <LatestNews
+                  image={image3}
+                  date=" Dec 22, 2023"
+                  title="Meet AutoManage, the best AI management tools"
+                  detaile="Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry."
+                />
               </SwiperSlide>
               <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div class="w-full ">
-                  <div class="mb-10 w-full">
-                    <div class="mb-2 overflow-hidden rounded">
-                      <img src={image1} alt="image" class="w-full" />
-                    </div>
-                    <div>
-                      <span class=" inline-block text-xs font-semibold text-gray-500 leading-loose ">
-                        Dec 22, 2023
-                      </span>
-                      <h3>
-                        <p
-                          href=" "
-                          class="mb-4 inline-block text-xl font-semibold text-dark hover:text-primary xl:text-2xl"
-                        >
-                          Meet AutoManage, the best AI management tools
-                        </p>
-                      </h3>
-                      <p class="text-base text-body-color">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <LatestNews
+                  image={image1}
+                  date=" Dec 22, 2023"
+                  title="Meet AutoManage, the best AI management tools"
+                  detaile="Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry."
+                />
+              </SwiperSlide>
+              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
+                <LatestNews
+                  image={image3}
+                  date=" Dec 22, 2023"
+                  title="Meet AutoManage, the best AI management tools"
+                  detaile="Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry."
+                />
               </SwiperSlide>
             </div>
             <div className="swiper-button-next"></div>
@@ -233,7 +177,7 @@ function Index(props) {
             onSlideChange={() => console.log("slide change")}
             className=""
             breakpoints={{
-              0:{
+              0: {
                 slidesPerView: 1.5,
                 spaceBetween: 1,
               },
@@ -250,188 +194,94 @@ function Index(props) {
                 spaceBetween: 1,
               },
             }}
-      
           >
             <div className="flex flex-wrap">
               <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div className="w-full p-3">
-                  <div className="mb-1 w-full">
-                    <div>
-                      <p className="leading-4 text-sm">
-                        More than 870,000 children in Ethiopia miss out on
-                        lifesaving measles, diphtheria, and tetanus vaccines in
-                        2018
-                      </p>
-                      <a
-                        href=""
-                        className="text-blue-300 text-xs line-clamp-2 mt-3"
-                      >
-                        https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
-                      </a>
-                      <div className="flex justify-between mt-8 text-xs text-gray-600">
-                        <p>Press release</p>
-                        <p>16 July 2019</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div className="w-full p-3">
-                  <div className="mb-1 w-full">
-                    <div>
-                      <p className="leading-4 text-sm">
-                        More than 870,000 children in Ethiopia miss out on
-                        lifesaving measles, diphtheria, and tetanus vaccines in
-                        2018
-                      </p>
-                      <a
-                        href=""
-                        className="text-blue-300 text-xs line-clamp-2 mt-3"
-                      >
-                        https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
-                      </a>
-                      <div className="flex justify-between mt-8 text-xs text-gray-600">
-                        <p>Press release</p>
-                        <p>16 July 2019</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div className="w-full p-3">
-                  <div className="mb-1 w-full">
-                    <div>
-                      <p className="leading-4 text-sm">
-                        More than 870,000 children in Ethiopia miss out on
-                        lifesaving measles, diphtheria, and tetanus vaccines in
-                        2018
-                      </p>
-                      <a
-                        href=""
-                        className="text-blue-300 text-xs line-clamp-2 mt-3"
-                      >
-                        https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
-                      </a>
-                      <div className="flex justify-between mt-8 text-xs text-gray-600">
-                        <p>Press release</p>
-                        <p>16 July 2019</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div className="w-full p-3">
-                  <div className="mb-1 w-full">
-                    <div>
-                      <p className="leading-4 text-sm">
-                        More than 870,000 children in Ethiopia miss out on
-                        lifesaving measles, diphtheria, and tetanus vaccines in
-                        2018
-                      </p>
-                      <a
-                        href=""
-                        className="text-blue-300 text-xs line-clamp-2 mt-3"
-                      >
-                        https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
-                      </a>
-                      <div className="flex justify-between mt-8 text-xs text-gray-600">
-                        <p>Press release</p>
-                        <p>16 July 2019</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div className="w-full p-3">
-                  <div className="mb-1 w-full">
-                    <div>
-                      <p className="leading-4 text-sm">
-                        More than 870,000 children in Ethiopia miss out on
-                        lifesaving measles, diphtheria, and tetanus vaccines in
-                        2018
-                      </p>
-                      <a
-                        href=""
-                        className="text-blue-300 text-xs line-clamp-2 mt-3"
-                      >
-                        https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
-                      </a>
-                      <div className="flex justify-between mt-8 text-xs text-gray-600">
-                        <p>Press release</p>
-                        <p>16 July 2019</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
-                <div className="w-full p-3">
-                  <div className="mb-1 w-full">
-                    <div>
-                      <p className="leading-4 text-sm">
-                        More than 870,000 children in Ethiopia miss out on
-                        lifesaving measles, diphtheria, and tetanus vaccines in
-                        2018
-                      </p>
-                      <a
-                        href=""
-                        className="text-blue-300 text-xs line-clamp-2 mt-3"
-                      >
-                        https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
-                      </a>
-                      <div className="flex justify-between mt-8 text-xs text-gray-600">
-                        <p>Press release</p>
-                        <p>16 July 2019</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-             
-            </div>
-            <div className="swiper-button-next">
-              
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.2rem"
-                height="1.2rem"
-                viewBox="0 0 32 32"
-                {...props}
-              >
-                <path
-                  fill="currentColor"
-                  d="m16 8l-1.43 1.393L20.15 15H8v2h12.15l-5.58 5.573L16 24l8-8z"
-                ></path>
-                <path
-                  fill="currentColor"
-                  d="M16 30a14 14 0 1 1 14-14a14.016 14.016 0 0 1-14 14m0-26a12 12 0 1 0 12 12A12.014 12.014 0 0 0 16 4"
-                ></path>
-              </svg> */}
-            </div>
-            <div className="swiper-button-prev">
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
+                <GlobalNew
+                  header="More than 870,000 children in Ethiopia miss out on
+              lifesaving measles, diphtheria, and tetanus vaccines in
+              2018"
+                  link="https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
+              "
+                  process="Press release"
+                  date="16 July 2019"
                 />
-              </svg> */}
+              </SwiperSlide>
+              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
+                <GlobalNew
+                  header="More than 870,000 children in Ethiopia miss out on
+              lifesaving measles, diphtheria, and tetanus vaccines in
+              2018"
+                  link="https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
+              "
+                  process="Press release"
+                  date="16 July 2019"
+                />
+              </SwiperSlide>
+              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
+                <GlobalNew
+                  header="More than 870,000 children in Ethiopia miss out on
+              lifesaving measles, diphtheria, and tetanus vaccines in
+              2018"
+                  link="https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
+              "
+                  process="Press release"
+                  date="16 July 2019"
+                />
+              </SwiperSlide>
+              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
+                <GlobalNew
+                  header="More than 870,000 children in Ethiopia miss out on
+              lifesaving measles, diphtheria, and tetanus vaccines in
+              2018"
+                  link="https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
+              "
+                  process="Press release"
+                  date="16 July 2019"
+                />
+              </SwiperSlide>
+              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
+                <GlobalNew
+                  header="More than 870,000 children in Ethiopia miss out on
+              lifesaving measles, diphtheria, and tetanus vaccines in
+              2018"
+                  link="https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
+              "
+                  process="Press release"
+                  date="16 July 2019"
+                />
+              </SwiperSlide>
+              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
+                <GlobalNew
+                  header="More than 870,000 children in Ethiopia miss out on
+              lifesaving measles, diphtheria, and tetanus vaccines in
+              2018"
+                  link="https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
+              "
+                  process="Press release"
+                  date="16 July 2019"
+                />
+              </SwiperSlide>
+              <SwiperSlide className="h-max gap-3 mx-1 px-3 bg-white rounded-xl">
+                <GlobalNew
+                  header="More than 870,000 children in Ethiopia miss out on
+              lifesaving measles, diphtheria, and tetanus vaccines in
+              2018"
+                  link="https://www.unicef.org/ethiopia/press-releases/more-870000-children-ethiopia-miss-out-lifesaving-measles-diphtheria-and-tetanus
+              "
+                  process="Press release"
+                  date="16 July 2019"
+                />
+              </SwiperSlide>
             </div>
+            <div className="swiper-button-next"></div>
+            <div className="swiper-button-prev"></div>
           </Swiper>
         </div>
 
-        <div class="bg-[#137E8F] text-center  text-black mt-10">
+        <Footer/>
+
+        {/* <div class="bg-[#137E8F] text-center  text-black mt-10">
           <div class="container mx-auto py-8 px-4 ">
             <div class="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto">
               <div class="mb-3">
@@ -576,7 +426,7 @@ function Index(props) {
               </ul>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
