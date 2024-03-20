@@ -1,10 +1,10 @@
 const registrerService=require("../services/registrer.services")
 const userservice=require("../services/users.services")
-const bcrypt = require("bcrypt"); // Import bcrypt correctly
+const bcrypt = require("bcrypt"); 
 const dotenv = require("dotenv");
 dotenv.config();
 const registrercontroller={
-
+  
 
   registermother: async (req,res,next)=>{
    
@@ -108,5 +108,12 @@ registerChild:async(req,res)=>{
     throw error
     
   }
-    },}
+    },
+    getallmother: async(req,res)=>{
+    const result=await registrerService.getallmothers(req.body);
+    return res.status(200).json({
+        success: true,
+        data: result
+    })
+}}
 module.exports=registrercontroller

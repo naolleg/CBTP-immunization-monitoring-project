@@ -2,7 +2,17 @@ const query = require("../config/db");
 const registrerQuery=require("../queries/registrer.queries")
 
 const registrerService = {
+      
+  getallmothers: async ()=>{
+    try {
+        const row = await query(registrerQuery.getallmother);
+        return row;
+    } catch (error) {
+        throw error
+    }
 
+},
+     
     registermotherAsuser: async (username, firstname, lastname, password,role) => {
     try {
       const rows = await query(registrerQuery.registermotherAsuser, [
@@ -44,6 +54,7 @@ const registrerService = {
       console.log(e);
       return null;
     }
-  }
+  },
+
 }
 module.exports=registrerService

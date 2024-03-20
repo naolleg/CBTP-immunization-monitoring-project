@@ -51,10 +51,11 @@ getuser: async (req,res)=>{
         console.log("dsssvvfsvfssvf");
         const registerAsUser = await userservice.registeruser(
           username,
+          password,
           firstname,
-          lastname,
           role,
-          password
+          lastname,
+          phonenumber
         );
         if(registerAsUser){
           return res.status(200).json({
