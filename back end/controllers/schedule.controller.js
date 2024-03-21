@@ -1,8 +1,15 @@
 const moment = require('moment');
-
+const childservice=require("../services/child.services")
+const schedulecontroller = {
 // Assuming you have retrieved the child's birthdate from the database as a string
-const birthdateFromDatabase = '2024-01-17 20:08:14';
+ birthdateFromDatabase :async (req,res)=>{
 
+  const result = await childservice.getchildbyid();
+  return res.status(200).json({
+    success: true,
+    data: result})
+  },
+}
 // Parse the birthdate and create a moment object
 const birthdate = moment(birthdateFromDatabase);
 

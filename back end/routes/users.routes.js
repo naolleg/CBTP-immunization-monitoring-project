@@ -9,5 +9,5 @@ userroute.put("/api/user/:userId/deactivate",[auth,isAdmin],usercontroller.deact
 userroute.post("/api/user",usercontroller.registeruser);
 userroute.get("/api/user/mother",registrercontroller. getallmother);
 userroute.post("/api/user/mother",registrercontroller.registermother);
-userroute.post("/api/user/child",registrercontroller.registerChild);
+userroute.get("/api/user/:mother_id/child",registrercontroller.getchildrenbymotherId);
 module.exports=userroute;

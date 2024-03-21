@@ -9,7 +9,7 @@ const registrercontroller={
   registermother: async (req,res,next)=>{
    
     try {
-       {
+        const {
         username,
         firstname,
         lastname,
@@ -115,5 +115,13 @@ console.log("rwwefwewefwefwefew");
         success: true,
         data: result
     })
+},
+getchildrenbymotherId: async(req,res)=>{
+  const motherId = req.params.motherId;
+  const result=await registrerService.getchildrenbymotherId(motherId);
+  return res.status(200).json({
+      success: true,
+      data: result
+  })
 }}
 module.exports=registrercontroller
