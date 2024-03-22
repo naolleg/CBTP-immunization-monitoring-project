@@ -1,9 +1,11 @@
 const express=require("express");
 const env=require("dotenv");
 const cors=require("cors");
-const multer=require("multer");
 const path=require("path");
-const appRoute=require("./routes/index.routes")
+const appRoute=require("./routes/index.routes");
+const upload=require("./config/multer")
+const { log } = require("console");
+
 const app=express();
 env.config();
 //middle ware
@@ -15,6 +17,8 @@ const corsOptions = {
   };
 
 app.use(cors(corsOptions));
+app.use("/uploads", express.static(path.join(__dirname, "public")));
+console.log(path.join(__dirname, "public"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
