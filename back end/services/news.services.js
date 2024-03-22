@@ -7,7 +7,7 @@ const newsService = {
         return result
     },
     postnews: async (data) => {
-        const result = await query(newsquery.postnewsquery, [data.image, data.title, data.description])
+        const result = await query(newsquery.postnewsquery, [data.title, data.description])
         console.log(result);
         return result
     }

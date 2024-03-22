@@ -3,7 +3,6 @@ const env=require("dotenv");
 const cors=require("cors");
 const path=require("path");
 const appRoute=require("./routes/index.routes");
-const upload=require("./config/multer")
 const { log } = require("console");
 
 const app=express();
@@ -17,7 +16,7 @@ const corsOptions = {
   };
 
 app.use(cors(corsOptions));
-app.use("/uploads", express.static(path.join(__dirname, "public")));
+app.use("/api/news", express.static(path.join(__dirname, "public")));
 console.log(path.join(__dirname, "public"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))

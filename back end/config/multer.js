@@ -10,9 +10,9 @@ const fileFilter = function (req, file, cb) {
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       if (req.body.fileFilter === 'image') {
-        cb(null, 'public/images/'); 
+        cb(null, 'public/'); 
       } else {
-        cb(null, 'public/files/'); 
+        cb(null, 'public/'); 
       }
     },
     filename: function (req, file, cb) {

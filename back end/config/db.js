@@ -44,4 +44,6 @@ function query(sql, params) {
 }
 
 
-module.exports = query;
+module.exports = {
+  query
+}
