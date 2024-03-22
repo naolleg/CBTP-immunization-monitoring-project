@@ -1,6 +1,8 @@
 const express=require("express");
 const env=require("dotenv");
 const cors=require("cors");
+const multer=require("multer");
+const path=require("path");
 const appRoute=require("./routes/index.routes")
 const app=express();
 env.config();
