@@ -27,7 +27,7 @@ connection.connect((err) => {
     console.log('Connected to the database');
   }
 });
-
+                                                                                                                    
 // Function to execute SQL queries
 function query(sql, params) {
   return new Promise((resolve, reject) => {
