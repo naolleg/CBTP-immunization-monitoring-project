@@ -19,7 +19,6 @@ const registrercontroller={
       } = req.body;
       
       if( !username ||
-        !password ||
         !firstname ||
         !lastname ||!date_of_birth||!address||!phonenumber){
           return res.status(400).json({
@@ -46,7 +45,7 @@ const registrercontroller={
           username,
           firstname,
           lastname,
-          password
+          
         );
         console.log(registerAsUser);
         const userid = registerAsUser.insertId;
