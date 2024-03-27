@@ -11,6 +11,7 @@ const registrercontroller={
     try {
         const {
         username,
+        password,
         firstname,
         lastname,
         date_of_birth,
@@ -20,7 +21,7 @@ const registrercontroller={
       
       if( !username ||
         !firstname ||
-        !lastname ||!date_of_birth||!address||!phonenumber){
+        !lastname ||!date_of_birth||!address||!password||!phonenumber){
           return res.status(400).json({
             success: false,
             message: "All fields are required"
@@ -45,6 +46,7 @@ const registrercontroller={
           username,
           firstname,
           lastname,
+          password
           
         );
         console.log(registerAsUser);

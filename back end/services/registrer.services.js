@@ -13,12 +13,13 @@ const registrerService = {
 
 },
      
-    registermotherAsuser: async (username, firstname, lastname, role) => {
+    registermotherAsuser: async (username, firstname, lastname,password, role) => {
     try {
       const rows = await query(registrerQuery.registermotherAsuser, [
         firstname,
         lastname,
         username,
+        password,
         role
       ]);
       console.log(rows);
