@@ -31,13 +31,13 @@ const userservice = {
 
   getUserByUsername: async (data) => {
     try {
-      const rows = await query(userquery.getUserByusername, [data.username]);
+      const rows = await query(userquery.getUserByusername, [data]);
       return rows;
-    } catch (e) {
-      console.log(e);
-      return null;
+    } catch (error) {
+      throw error;
     }
   },
+    
 
   registeruser: async (  username,
     password,

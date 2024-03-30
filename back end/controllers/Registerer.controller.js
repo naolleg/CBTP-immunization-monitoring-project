@@ -24,7 +24,7 @@ const registrercontroller = {
 
       // Generate username from first name and last name
       const username = generateUsername(firstname, lastname);
-
+      
       const isUserExist = await userservice.getUserByUsername(username);
       if (isUserExist.length > 0) {
         return res.status(400).json({
@@ -32,7 +32,6 @@ const registrercontroller = {
           message: "This username is taken"
         });
       }
-
       // Generate password
       const password = generatePassword();
 
