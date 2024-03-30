@@ -126,7 +126,8 @@ const registrercontroller = {
 
 // Helper function to generate a username from first name and last name
 function generateUsername(firstname, lastname) {
-  const username = `${firstname.toLowerCase()}.${lastname.toLowerCase()}`;
+  const uniqueId = Math.floor(Math.random() * 100); 
+  const username = `${firstname.toLowerCase()}.${lastname.toLowerCase()}.${uniqueId}`;
   return username;
 }
 
