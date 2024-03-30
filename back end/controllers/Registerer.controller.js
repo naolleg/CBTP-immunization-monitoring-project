@@ -1,128 +1,140 @@
-const registrerService=require("../services/registrer.services")
-const userservice=require("../services/users.services")
-const bcrypt = require("bcrypt"); 
+const registrerService = require("../services/registrer.services");
+const userservice = require("../services/users.services");
+const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
-const registrercontroller={
-  
 
-  registermother: async (req,res,next)=>{
-   
+const registrercontroller = {
+  registermother: async (req, res, next) => {
     try {
-        const {
-        username,
-        password,
+      const {
         firstname,
         lastname,
         date_of_birth,
         address,
         phonenumber
       } = req.body;
-      
-      if( !username ||
-        !firstname ||
-        !lastname ||!date_of_birth||!address||!password||!phonenumber){
-          return res.status(400).json({
-            success: false,
-            message: "All fields are required"
-          })
-        }
-        console.log("ssferegfewref");
-        const isUserExist = await userservice.getUserByUsername(username);
-        console.log(isUserExist);
-        if(isUserExist.length>0){
-          return res.status(400).json({
-            success: false,
-            message: "this username is taken"
-          })
-        }
-        //add constant for the salt
-        const saltRounds = 10
-        const salt = bcrypt.genSaltSync(saltRounds);
-        req.body.password = bcrypt.hashSync(password,salt);
-        
-        console.log("dsssvvfsvfssvf");
-        const registerAsUser = await registrerService.registermotherAsuser(
-          username,
-          firstname,
-          lastname,
-          password
-          
-        );
-        console.log(registerAsUser);
-        const userid = registerAsUser.insertId;
-        console.log(userid);
-const registerAsMother = await registrerService.registermother(
-  userid,
-  date_of_birth,
-  address,
-  phonenumber
-);
 
-     
-        if(registerAsUser&&registerAsMother){
-          return res.status(200).json({
-            success: true,
-            message: "user registered successfully"
-          })
-        }
-      
-    } catch (error) {
-      throw error
-    }
-
-
-  },
-registerChild:async(req,res)=>{
-  try {
-    const{
-      firstname,
-      middlename,
-      lastname,
-      gender,
-      date_of_birth,
-      blood_type
-    }=req.body
-
-    if( !middlename ||
-      !gender ||
-      !date_of_birth ||
-      !firstname ||
-      !lastname ||
-      !blood_type){
+      if (!firstname || !lastname || !date_of_birth || !address || !phonenumber) {
         return res.status(400).json({
           success: false,
           message: "All fields are required"
-        })
+        });
       }
-console.log("rwwefwewefwefwefew");
-      const registerchild = await registrerService.registerchild(req.body);
-      if(registerchild){
+
+      // Generate username from first name and last name
+      const username = generateUsername(firstname, lastname);
+
+      const isUserExist = await userservice.getUserByUsername(username);
+      if (isUserExist.length > 0) {
+        return res.status(400).json({
+          success: false,
+          message: "This username is taken"
+        });
+      }
+
+      // Generate password
+      const password = generatePassword();
+
+      // Hash the password
+      const saltRounds = 10;
+      const salt = bcrypt.genSaltSync(saltRounds);
+      const hashedPassword = bcrypt.hashSync(password, salt);
+
+      const registerAsUser = await registrerService.registermotherAsuser(
+        username,
+        firstname,
+        lastname,
+        hashedPassword
+      );
+      const userid = registerAsUser.insertId;
+
+      const registerAsMother = await registrerService.registermother(
+        userid,
+        date_of_birth,
+        address,
+        phonenumber
+      );
+
+      if (registerAsUser && registerAsMother) {
         return res.status(200).json({
           success: true,
-          message: "user registered successfully"
-        })
+          message: "User registered successfully",
+          username: username,
+          password: password
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  registerChild: async (req, res) => {
+    try {
+      const {
+        firstname,
+        middlename,
+        lastname,
+        gender,
+        date_of_birth,
+        blood_type
+      } = req.body;
+
+      if (
+        !middlename ||
+        !gender ||
+        !date_of_birth ||
+        !firstname ||
+        !lastname ||
+        !blood_type
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "All fields are required"
+        });
       }
 
+      const registerchild = await registrerService.registerchild(req.body);
+      if (registerchild) {
+        return res.status(200).json({
+          success: true,
+          message: "User registered successfully"
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
 
-  } catch (error) {
-    throw error
-    
-  }
-    },
-    getallmother: async(req,res)=>{
-    const result=await registrerService.getallmothers(req.body);
+  getallmother: async (req, res) => {
+    const result = await registrerService.getallmothers(req.body);
     return res.status(200).json({
-        success: true,
-        data: result
-    })
-},
-getchildrenbymotherId: async(req,res)=>{
-  const motherId = req.params.motherId;
-  const result=await registrerService.getchildrenbymotherId(motherId);
-  return res.status(200).json({
       success: true,
       data: result
-  })
-}}
-module.exports=registrercontroller
+    });
+  },
+
+  getchildrenbymotherId: async (req, res) => {
+    const motherId = req.params.motherId;
+    const result = await registrerService.getchildrenbymotherId(motherId);
+    return res.status(200).json({
+      success: true,
+      data: result
+    });
+  }
+};
+
+// Helper function to generate a username from first name and last name
+function generateUsername(firstname, lastname) {
+  const username = `${firstname.toLowerCase()}.${lastname.toLowerCase()}`;
+  return username;
+}
+
+// Helper function to generate a random password
+function generatePassword() {
+  // Generate a random password using any desired logic
+  const password = "GeneratedPassword123";
+  return password;
+}
+
+module.exports = registrercontroller;
