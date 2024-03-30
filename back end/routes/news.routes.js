@@ -6,5 +6,6 @@ const upload=require("../config/multer")
 
 newsroute.get("/api/news",newscontroller.getNews);
 newsroute.post("/api/news",upload.single("image"),newscontroller.postNews);
+newsroute.delete
 
 module.exports=newsroute;

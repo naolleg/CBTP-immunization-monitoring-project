@@ -1,17 +1,18 @@
 const moment = require('moment');
-const childservice=require("../services/child.services")
-const schedulecontroller = {
-// Assuming you have retrieved the child's birthdate from the database as a string
- birthdateFromDatabase :async (req,res)=>{
+const childservice = require("../services/child.services");
 
-  const result = await childservice.getchildbyid();
-  return res.status(200).json({
-    success: true,
-    data: result})
-  },
-}
-// Parse the birthdate and create a moment object
-const birthdate = moment(birthdateFromDatabase);
+const schedulecontroller = {
+  birthdateFromDatabase: async (req, res) => {
+    const result = await childservice.getchildbyid();
+    return res.status(200).json({
+      success: true,
+      data: result
+    });
+  }
+};
+
+// Get the child's birthdate from the database
+const birthdate = moment(schedulecontroller.birthdateFromDatabase());
 
 // Calculate the child's age in months
 const ageInMonths = moment().diff(birthdate, 'months');
