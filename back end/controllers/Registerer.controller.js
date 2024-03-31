@@ -114,7 +114,7 @@ const registrercontroller = {
   },
 
   getchildrenbymotherId: async (req, res) => {
-    const motherId = req.params.motherId;
+    const motherId = req.params.mother_id;
     const result = await registrerService.getchildrenbymotherId(motherId);
     return res.status(200).json({
       success: true,
